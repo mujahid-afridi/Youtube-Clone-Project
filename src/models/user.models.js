@@ -4,20 +4,14 @@ import jwt from "jsonwebtoken"
 
 
 const userSchema = new mongoose.Schema({
-    id : {
-        typeof : String,
-        required : true,
-        unique : true,
-        index : true
-    },
     watchHistory : [
         {
-            typeof : Schema.Types.ObjectId,
+            type : Schema.Types.ObjectId,
             ref : "Video"
         }
     ],
     userName : {
-        typeof : String,
+        type : String,
         lowercase : true,
         required : true,
         unique : true,
@@ -25,38 +19,38 @@ const userSchema = new mongoose.Schema({
         trim : true
     },
     email : {
-        typeof : String,
+        type : String,
         lowercase : true,
         required : true,
         unique : true,
         trim : true
     },
     fullName : {
-        typeof : String,
+        type : String,
         required : true,
         trim : true,
         index : true
     },
     avatar : {
-        typeof : String, //cloudinary url
+        type : String, //cloudinary url
         required : true
     },
     coverImage : {
-        typeof : String, 
+        type : String, 
     },
     password : {
-        typeof : String,
+        type : String,
         required : [true, 'Password required'],
     },
     refreshToken : {
-        typeof : String
+        type  : String
     }
 }, {timestamps : true})
 
 userSchema.pre("save", async function(next){
     if(!this.isModified("password")) return next()
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 } )
 
