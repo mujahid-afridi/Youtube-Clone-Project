@@ -10,6 +10,10 @@ app.use(cors({
     credentials : true,
 }))
 
+//router import
+import userRouter from "./routes/user.route.js"
+app.use('/api/v1/user', userRouter)
+
 
 app.use(express.json({limit : "16kb"}))
 

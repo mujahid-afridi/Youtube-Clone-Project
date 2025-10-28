@@ -16,12 +16,12 @@ const asyncHandler = (func) => {
         try{
             await func(req,res,next)
         }catch(error){
-            res.status(error.code).json({
+            res.status(error.statusCode || 500).json({
                 success : false,
-                message : error.message
+                message : "error occurred in asynhandler file"
             })
         }
     }
 }
 
-export {asyncHandler}
+export default asyncHandler
