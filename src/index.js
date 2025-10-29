@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
+dotenv.config({ path: './.env' })
 
 import connnectDB from "./db/index.js";
 
-dotenv.config({ path: './.env' })
 
 import {app} from './app.js'
 
